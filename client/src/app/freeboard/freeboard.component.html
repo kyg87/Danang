@@ -1,3 +1,174 @@
-<p>
-  freeboard works!
-</p>
+<div class="container">
+
+  <div class="at-content-main">
+
+
+
+    <style>
+      .amina-header {
+        line-height: 22px;
+        margin-bottom: 15px;
+      }
+
+      .amina-header .header-breadcrumb {
+        margin-top: 4px;
+      }
+
+      @media all and (max-width:460px) {
+        .responsive .amina-header .header-breadcrumb {
+          display: none;
+        }
+      }
+    </style>
+    <div class="amina-header">
+      <span class="header-breadcrumb pull-right text-muted">
+        <i class="fa fa-home"></i> 홈 &gt; 참여공간 &gt; 참여공간 </span>
+      <div class="div-title-underbar font-18">
+        <span class="div-title-underbar-bold border-black">
+          <b>참여공간</b>
+        </span>
+      </div>
+    </div>
+
+    <section class="board-list">
+
+
+     
+
+
+      <div class="list-wrap">
+        <form name="fboardlist" id="fboardlist" action="./board_list_update.php" onsubmit="return fboardlist_submit(this);" method="post"
+          role="form" class="form">
+          <input type="hidden" name="bo_table" value="community_1">
+          <input type="hidden" name="sfl" value="">
+          <input type="hidden" name="stx" value="">
+          <input type="hidden" name="spt" value="">
+          <input type="hidden" name="sca" value="">
+          <input type="hidden" name="sst" value="wr_num, wr_reply">
+          <input type="hidden" name="sod" value="">
+          <input type="hidden" name="page" value="1">
+          <input type="hidden" name="sw" value="">
+          <div class="list-board">
+            <div class="list-head div-head border-black">
+              <span class="wr-num hidden-xs">번호</span>
+              <span class="wr-subject">제목</span>
+              <span class="wr-name hidden-xs">이름</span>
+              <span class="wr-date hidden-xs">
+                <a href="/bbs/board.php?bo_table=community_1&amp;sop=and&amp;sst=wr_datetime&amp;sod=desc&amp;sfl=&amp;stx=&amp;sca=&amp;page=1">날짜</a>
+              </span>
+              <span class="wr-hit hidden-xs">
+                <a href="/bbs/board.php?bo_table=community_1&amp;sop=and&amp;sst=wr_hit&amp;sod=desc&amp;sfl=&amp;stx=&amp;sca=&amp;page=1">조회</a>
+              </span>
+            </div>
+            <ul id="list-body" class="list-body">
+
+                <li *ngFor="let board of boards" class="list-item"   [routerLink]="['/board', board._id]" (click)="showBoard(board)">
+                  <div class="wr-num hidden-xs">1</div>
+                  <div class="wr-subject">
+                    <a  class="item-subject">
+                      <span class="wr-icon wr-new"></span> {{board.title}} </a>
+                    <div class="item-details text-muted font-12 visible-xs ellipsis">
+                      <span>
+                        <a  >
+                          <span class="guest">
+                            <span class="lv-icon lv-guest">G</span> 김</span>
+                        </a>
+                      </span>
+                      <span>
+                        <i class="fa fa-eye"></i> 2</span>
+                      <span>
+                        <i class="fa fa-clock-o"></i>
+                        <span class="orangered">3초전</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="wr-name hidden-xs">
+                    <a href="#">
+                      <span class="guest">
+                         {{board.writer}}</span>
+                    </a>
+                  </div>
+                  <div class="wr-date hidden-xs" style="overflow: hidden">
+                    <span class="orangered">{{board.date}}</span>
+                  </div>
+                  <div class="wr-hit hidden-xs">
+                    2 </div>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+            <!-- <div class="wr-none">게시물이 없습니다.</div> -->
+          </div>
+          <div class="list-btn">
+            <div class="form-group pull-right">
+              <div class="btn-group dropup" role="group">
+                <ul class="dropdown-menu sort-drop" role="menu" aria-labelledby="sortLabel">
+                  <li>
+                    <a href="./board.php?bo_table=community_1&amp;sca=">
+                      <i class="fa fa-power-off"></i> 초기화
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/bbs/board.php?bo_table=community_1&amp;sop=and&amp;sst=wr_datetime&amp;sod=desc&amp;sfl=&amp;stx=&amp;sca=&amp;page=1">
+                      <i class="fa fa-clock-o"></i> 날짜순
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/bbs/board.php?bo_table=community_1&amp;sop=and&amp;sst=wr_hit&amp;sod=desc&amp;sfl=&amp;stx=&amp;sca=&amp;page=1">
+                      <i class="fa fa-eye"></i> 조회순
+                    </a>
+                  </li>
+                </ul>
+                <a id="sortLabel" role="button" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                  class="btn btn-black btn-sm">
+                  <i class="fa fa-sort"></i> 정렬 </a>
+                <a role="button" routerLink="/write" class="btn btn-color btn-sm">
+                  <i class="fa fa-pencil"></i> 글쓰기</a>
+              </div>
+            </div>
+            <div class="form-group pull-left">
+              <div class="btn-group" role="group">
+                <a role="button" href="#" class="btn btn-black btn-sm" data-toggle="modal" data-target="#searchModal" onclick="return false;">
+                  <i class="fa fa-search"></i>
+                  <span class="hidden-xs"> 검색</span>
+                </a>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+
+          <nav class="text-center">
+            <ul class="pagination">
+              <li>
+                <a href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
+              <li>
+                <a href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="clearfix"></div>
+
+        </form>
+
+
+      </div>
+
+
+    </section>
+
+    <!-- } 게시판 목록 끝 -->
+
+    <div class="h20"></div>
+    <script src="http://yjsosic.com/js/sns.js"></script>
+  </div>
+</div>

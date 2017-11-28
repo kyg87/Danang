@@ -1,0 +1,258 @@
+<div class="container">
+  <div class="at-content-main">
+
+
+
+    <style>
+      .amina-header {
+        line-height: 22px;
+        margin-bottom: 15px;
+      }
+
+      .amina-header .header-breadcrumb {
+        margin-top: 4px;
+      }
+
+      @media all and (max-width:460px) {
+        .responsive .amina-header .header-breadcrumb {
+          display: none;
+        }
+      }
+    </style>
+    <div class="amina-header">
+      <span class="header-breadcrumb pull-right text-muted">
+        <i class="fa fa-home"></i> 홈 &gt; 자유게시판 &gt; 글쓰기 </span>
+      <div class="div-title-underbar font-18">
+        <span class="div-title-underbar-bold border-black">
+          <b>자유게시판</b>
+        </span>
+      </div>
+    </div>
+    <!-- skin : Miso-Basic -->
+    <div id="bo_w" class="write-wrap">
+
+      <!-- 게시물 작성/수정 시작 { -->
+      <form class="form-horizontal">
+        <input type="hidden" name="uid" value="2017112816334851">
+        <input type="hidden" name="w" value="">
+        <input type="hidden" name="bo_table" value="community_1">
+        <input type="hidden" name="wr_id" value="0">
+        <input type="hidden" name="sca" value="">
+        <input type="hidden" name="sfl" value="">
+        <input type="hidden" name="stx" value="">
+        <input type="hidden" name="spt" value="">
+        <input type="hidden" name="sst" value="">
+        <input type="hidden" name="sod" value="">
+        <input type="hidden" name="page" value="">
+
+        <div class="form-group has-feedback">
+          <label class="col-sm-2 control-label" for="wr_name">이름</label>
+          <div class="col-sm-3">
+            <input type="text" [(ngModel)]="board.writer" name="wr_name" value="" id="wr_name" required="" class="form-control input-sm" size="10" maxlength="20">
+            <span class="fa fa-check form-control-feedback"></span>
+          </div>
+     
+        </div>
+
+        <!-- <div class="form-group has-feedback">
+<label class="col-sm-2 control-label" for="wr_password">비밀번호</label>
+<div class="col-sm-3">
+<input type="password" name="wr_password" id="wr_password" required="" class="form-control input-sm" maxlength="20">
+<span class="fa fa-check form-control-feedback"></span>
+</div>
+</div> -->
+
+        <!-- <div class="form-group">
+          <label class="col-sm-2 control-label" for="wr_email">E-mail</label>
+          <div class="col-sm-6">
+            <input type="text" name="wr_email" id="wr_email" value="" class="form-control input-sm email" size="50" maxlength="100">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="wr_homepage">홈페이지</label>
+          <div class="col-sm-6">
+            <input type="text" name="wr_homepage" id="wr_homepage" value="" class="form-control input-sm" size="50">
+          </div>
+        </div> -->
+
+        <!-- <div class="form-group">
+          <label class="col-sm-2 control-label hidden-xs">포토</label>
+          <div class="col-sm-10">
+            <input type="hidden" name="as_icon" value="" id="picon">
+            <style>
+              .write-wrap .talker-photo i {
+                color: rgb(51, 51, 51);
+              }
+            </style>
+            <span id="ticon" class="talker-photo">
+              <i class="fa fa-user"></i>
+            </span>
+            &nbsp;
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-default" onclick="apms_emoticon('picon', 'ticon');" title="이모티콘">
+                <input type="radio" name="select_icon" id="select_icon1">
+                <i class="fa fa-smile-o fa-lg"></i>
+                <span class="sound_only">이모티콘</span>
+              </label>
+              <label class="btn btn-default" onclick="win_scrap('http://yjsosic.com/bbs/ficon.php?fid=picon&amp;sid=ticon');" title="FA아이콘">
+                <input type="radio" name="select_icon" id="select_icon2">
+                <i class="fa fa-info-circle fa-lg"></i>
+                <span class="sound_only">FA아이콘</span>
+              </label>
+              <label class="btn btn-default" onclick="apms_myicon();" title="내사진">
+                <input type="radio" name="select_icon" id="select_icon3">
+                <i class="fa fa-user fa-lg"></i>
+                <span class="sound_only">내사진</span>
+              </label>
+            </div>
+          </div>
+        </div> -->
+
+
+
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="wr_subject">제목</label>
+          <div class="col-sm-10">
+            <div class="input-group">
+              <input type="text" [(ngModel)] ="board.title" name="wr_subject" value="" id="wr_subject" required="" class="form-control input-sm" size="50" maxlength="255">
+              <!-- <span class="input-group-btn" role="group">
+                <a href="http://yjsosic.com/bbs/helper.php" target="_blank" class="btn btn-black btn-sm hidden-xs win_scrap">안내</a>
+                <a href="http://yjsosic.com/bbs/helper.php?act=map" target="_blank" class="btn btn-black btn-sm hidden-xs win_scrap">지도</a>
+              </span> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12">
+            <!-- <span class="sound_only">웹에디터 시작</span> -->
+            <textarea id="wr_content"[(ngModel)] ="board.content" name="wr_content" class="form-control input-sm write-content" maxlength="65536" style="width:100%;height:300px"></textarea>
+            <!-- <span class="sound_only">웹 에디터 끝</span> -->
+          </div>
+        </div>
+
+        <!-- <div class="well well-sm text-center">
+
+          <script>var g5_captcha_url = "http://yjsosic.com/plugin/kcaptcha";</script>
+          <script src="http://yjsosic.com/plugin/kcaptcha/kcaptcha.js"></script>
+          <fieldset id="captcha" class="captcha">
+            <legend>
+              <label for="captcha_key">자동등록방지</label>
+            </legend>
+            <img src="http://yjsosic.com/plugin/kcaptcha/kcaptcha_image.php?t=1511854432390" alt="" id="captcha_img">
+            <button type="button" id="captcha_mp3">
+              <span></span>숫자음성듣기</button>
+            <button type="button" id="captcha_reload">
+              <span></span>새로고침</button>
+            <input type="text" name="captcha_key" id="captcha_key" required="" class="captcha_box required"
+              size="6" maxlength="6">
+            <span id="captcha_info">자동등록방지 숫자를 순서대로 입력하세요.</span>
+          </fieldset>
+        </div> -->
+
+        <div class="write-btn pull-center text-center">
+          <button  class="btn btn-color btn-sm" (click)="addBoard()">
+            <i class="fa fa-check"></i>
+            <b>작성완료</b>
+          </button>
+          <a href="#" class="btn btn-black btn-sm" role="button">취소</a>
+        </div>
+
+        <div class="clearfix"></div>
+
+      </form>
+
+      <!-- <script>
+
+        function apms_myicon() {
+          document.getElementById("picon").value = '';
+          document.getElementById("ticon").innerHTML = '<i class="fa fa-user"></i>';
+          return true;
+        }
+
+        function html_auto_br(obj) {
+          if (obj.checked) {
+            result = confirm("자동 줄바꿈을 하시겠습니까?\n\n자동 줄바꿈은 게시물 내용중 줄바뀐 곳을<br>태그로 변환하는 기능입니다.");
+            if (result)
+              obj.value = "html2";
+            else
+              obj.value = "html1";
+          }
+          else
+            obj.value = "";
+        }
+
+        function fwrite_submit(f) {
+
+          var wr_content_editor = document.getElementById('wr_content');
+          if (!wr_content_editor.value) { alert("내용을 입력해 주십시오."); wr_content_editor.focus(); return false; }
+
+          var subject = "";
+          var content = "";
+          $.ajax({
+            url: g5_bbs_url + "/ajax.filter.php",
+            type: "POST",
+            data: {
+              "subject": f.wr_subject.value,
+              "content": f.wr_content.value
+            },
+            dataType: "json",
+            async: false,
+            cache: false,
+            success: function (data, textStatus) {
+              subject = data.subject;
+              content = data.content;
+            }
+          });
+
+          if (subject) {
+            alert("제목에 금지단어('" + subject + "')가 포함되어있습니다");
+            f.wr_subject.focus();
+            return false;
+          }
+
+          if (content) {
+            alert("내용에 금지단어('" + content + "')가 포함되어있습니다");
+            if (typeof (ed_wr_content) != "undefined")
+              ed_wr_content.returnFalse();
+            else
+              f.wr_content.focus();
+            return false;
+          }
+
+          if (document.getElementById("char_count")) {
+            if (char_min > 0 || char_max > 0) {
+              var cnt = parseInt(check_byte("wr_content", "char_count"));
+              if (char_min > 0 && char_min > cnt) {
+                alert("내용은 " + char_min + "글자 이상 쓰셔야 합니다.");
+                return false;
+              }
+              else if (char_max > 0 && char_max < cnt) {
+                alert("내용은 " + char_max + "글자 이하로 쓰셔야 합니다.");
+                return false;
+              }
+            }
+          }
+
+
+
+
+          if (!chk_captcha()) return false;
+
+          document.getElementById("btn_submit").disabled = "disabled";
+
+          return true;
+        }
+
+        $(function () {
+          $("#wr_content").addClass("form-control input-sm write-content");
+        });
+      </script> -->
+    </div>
+    <div class="h20"></div>
+    <script src="http://yjsosic.com/js/sns.js"></script>
+  </div>
+  {{board | json}}
+</div>
