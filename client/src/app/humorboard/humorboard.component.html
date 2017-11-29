@@ -33,7 +33,7 @@
     <section class="board-list">
 
 
-     
+
 
 
       <div class="list-wrap">
@@ -60,42 +60,61 @@
                 <a href="/bbs/board.php?bo_table=community_1&amp;sop=and&amp;sst=wr_hit&amp;sod=desc&amp;sfl=&amp;stx=&amp;sca=&amp;page=1">조회</a>
               </span>
             </div>
-            <ul id="list-body" class="list-body">
+            <div class="list-webzine">
+              <div *ngFor = "let humor of data?.value" class="media list-media">
+                <div class="list-item">
+                  <div class="img img-left pull-left">
+                    <div class="imgframe">
+                      <div class="img-wrap" style="padding-bottom:75%;">
+                        <div *ngFor = "let src of humor.imgs  | slice " class="img-item">
+                          <a href="http://yjsosic.com/bbs/board.php?bo_table=news_1&amp;wr_id=496&amp;sca=%EB%B3%B4%EA%B1%B4.%EB%B3%B5%EC%A7%80">
 
-                <li *ngFor="let board of boards" class="list-item" [routerLink]="['/board', board._id]" (click)="showBoard(board)">
-                  <div class="wr-num hidden-xs">1</div>
-                  <div class="wr-subject">
-                    <a  class="item-subject">
-                      <span class="wr-icon wr-new"></span> {{board.title}} </a>
-                    <div class="item-details text-muted font-12 visible-xs ellipsis">
-                      <span>
-                        <a  >
-                          <span class="guest">
-                            <span class="lv-icon lv-guest">G</span> 김</span>
-                        </a>
-                      </span>
-                      <span>
-                        <i class="fa fa-eye"></i> 2</span>
-                      <span>
-                        <i class="fa fa-clock-o"></i>
-                        <span class="orangered">3초전</span>
-                      </span>
+                            <img src="{{src.src}}"
+                              alt="">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="shadow-line">
+                      <img src="http://yjsosic.com/img/shadow4.png">
                     </div>
                   </div>
-                  <div class="wr-name hidden-xs">
-                    <a href="#">
-                      <span class="guest">
-                         {{board.writer}}</span>
-                    </a>
+                  <div class="">
+                    <h2 class="media-heading">
+                      <a [routerLink]="['/humor', humor._id]" class="ellipsis">
+                        {{humor.title}} </a>
+                    </h2>
+                    <div class="list-details text-muted">
+                      <span class="hidden-xs">
+                        보건.복지
+                        <span class="list-sp">|</span>
+                      </span>
+                      댓글 0
+                      <!--	<span class="list-sp">|</span>
+                      조회
+                      3-->
+                      <span class="hidden-xs">
+                        <span class="list-sp">|</span>
+                        3일전 </span>
+                    </div>
+                    <div class="list-cont">
+                      <a href="http://yjsosic.com/bbs/board.php?bo_table=news_1&amp;wr_id=496&amp;sca=%EB%B3%B4%EA%B1%B4.%EB%B3%B5%EC%A7%80" class="ellipsis">
+                        <span class="text-muted">
+                          여주대학교와 함께 양치질은 즐거워 진행여주시(시장 원경희)가 추진하고 있는 ‘영유아, 아동청소년 구강증진사업’이 여주대학교 치위생학과와 함께 양치질 실천에 앞장서고 있다.치아우식증이 발생하기 쉬운 학동기아동 3개교(세종초,
+                          여주초,여흥초) 2546명을 대상으로 올바른 잇솔질 관리로 치면세균막 검사, 불소도포를 함으로써 학동기 아동의 안전하고 건강한 성장을 위한 구강생활의 중요성과 자신의 건강으로부터
+                          바른사회생활의 출발점임을 인식 할 수 있도록 개선하는 등 자가 구강관리 생활문화를 심어주는 것이 중요하다. 매년 시에서 시행한 프로그램…
+                          <span
+                            class="font-11 text-muted">더보기</span>
+                        </span>
+                      </a>
+                    </div>
                   </div>
-                  <div class="wr-date hidden-xs" style="overflow: hidden">
-                    <span class="orangered">{{board.date}}</span>
-                  </div>
-                  <div class="wr-hit hidden-xs">
-                    2 </div>
-                </li>
-            </ul>
-            <div class="clearfix"></div>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+              
+
+            </div>
             <!-- <div class="wr-none">게시물이 없습니다.</div> -->
           </div>
           <div class="list-btn">
@@ -143,20 +162,35 @@
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
+              <li   *ngFor = "let pageNo of pages">
+                  <a [routerLink]="['/humorboard', pageNo]" >{{pageNo}}</a>
+          
+                  
+              </li>
+              <!-- <li class="active">
+                <a href="#">1</a>
+              </li>
               <li>
-                <a href="#" aria-label="Next">
+                <a href="#">2</a>
+              </li>
+              <li>
+                <a href="#">3</a>
+              </li>
+              <li>
+                <a href="#">4</a>
+              </li>
+              <li>
+                <a href="#">5</a>
+              </li> -->
+              <li>
+                <a [routerLink]="['/humorboard', endPageNo+1]" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                 </a>
               </li>
             </ul>
           </nav>
 
-          <div class="clearfix"></div>
+
 
         </form>
 

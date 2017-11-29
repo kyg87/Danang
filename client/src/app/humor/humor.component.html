@@ -1,0 +1,237 @@
+<div class="container">
+    <div class="at-content-main">
+  
+  
+  
+      <style>
+        .amina-header {
+          line-height: 22px;
+          margin-bottom: 15px;
+        }
+  
+        .amina-header .header-breadcrumb {
+          margin-top: 4px;
+        }
+  
+        @media all and (max-width:460px) {
+          .responsive .amina-header .header-breadcrumb {
+            display: none;
+          }
+        }
+      </style>
+      <div class="amina-header">
+        <span class="header-breadcrumb pull-right text-muted">
+          <i class="fa fa-home"></i> 홈 &gt; 참여공간 &gt; 참여공간 </span>
+        <div class="div-title-underbar font-18">
+          <span class="div-title-underbar-bold border-black">
+            <b>참여공간</b>
+          </span>
+        </div>
+      </div>
+      <script src="http://yjsosic.com/js/viewimageresize.js"></script>
+  
+      <div class="view-wrap">
+  
+  
+        <h1>
+          {{data?.title}}</h1>
+  
+        <div class="panel panel-default view-head no-attach">
+          <div class="panel-heading">
+            <div class="font-12 text-muted">
+              <i class="fa fa-user"></i>
+              <a href="javascript:;" onclick="showSideView(this, '', '김', '', '');">
+                <span class="guest">writer</span>
+              </a>
+              
+         
+              <span class="hidden-xs pull-right">
+                <i class="fa fa-clock-o"></i>
+                19분전 </span>
+            </div>
+          </div>
+        </div>
+  
+  
+        <div class="view-img">
+        </div>
+  
+        <div class="view-content">
+            <div *ngFor = "let img of data?.imgs">
+              <img src ="{{img.src}}">
+            </div>
+        </div>
+  
+  
+  
+  
+        <div class="view-icon">
+          <div class="pull-right">
+            <div class="form-group">
+              <button onclick="apms_shingo('community_1', '86');" class="btn btn-black btn-xs">
+                <i class="fa fa-bell"></i>
+                <span class="hidden-xs">신고</span>
+              </button>
+            </div>
+          </div>
+          <div class="pull-left">
+            <div class="form-group">
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+  
+  
+        <script>
+          // 글자수 제한
+          var char_min = parseInt(0); // 최소
+          var char_max = parseInt(0); // 최대
+        </script>
+  
+        <script src="//code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="http://yjsosic.com/skin/board/Miso-Basic/view/talk_mention_v1.2/css/jquery.atwho.css">
+        <link rel="stylesheet" href="http://yjsosic.com/skin/board/Miso-Basic/view/talk_mention_v1.2/css/talk.css">
+        <script src="http://yjsosic.com/skin/board/Miso-Basic/view/talk_mention_v1.2/js/jquery.atwho.min.js"></script>
+        <script src="http://yjsosic.com/skin/board/Miso-Basic/view/talk_mention_v1.2/js/jquery.autogrow.js"></script>
+        <script type="text/javascript" src="http://ichord.github.io/Caret.js/src/jquery.caret.js"></script>
+  
+        <div class="view-comment font-18 en">
+          <i class="fa fa-commenting"></i>
+          <span class="orangered">0</span> Comments
+        </div>
+  
+        <div id="viewcomment" class="view-comment-box">
+          <article class="anb_vbo">
+            <section id="vcmt_anchor" class="vbo_vcmt vbo_vcmt_chat comment-media">
+            </section>
+  
+          </article>
+        </div>
+  
+        <div class="print-hide ">
+          <div id="vbo_wcmt">
+            <form id="fviewcomment" name="fviewcomment_wrap_chat" action="./write_comment_update.page.php" onsubmit="return fviewcomment_submit(this);"
+              method="post" autocomplete="off" class="form" role="form">
+              <input type="hidden" name="w" value="c" id="w">
+              <input type="hidden" name="bo_table" value="community_1">
+              <input type="hidden" name="wr_id" value="86">
+              <input type="hidden" name="comment_id" value="" id="comment_id">
+              <input type="hidden" name="comment_url" value="./view_comment.page.php?bo_table=community_1&amp;wr_id=86&amp;crows=20" id="comment_url">
+              <input type="hidden" name="crows" value="20">
+              <input type="hidden" name="page" value="" id="comment_page">
+              <input type="hidden" name="is_good" value="">
+              <div class="comment-box">
+                <div class="pull-left help-block hidden-xs">
+                  <i class="fa fa-commenting-o"></i> 상업광고, 인신공격, 비방, 욕설 등은 임의로 삭제될 수 있으며 형사처벌의 대상이 됩니다.
+                </div>
+    
+  
+                <div class="form-group comment-content">
+                  <div class="comment-cell">
+                    <textarea tabindex="13" id="wr_content" name="wr_content" maxlength="10000" rows="5" class="form-control input-sm" title="내용"
+                      style="height: 90px;"></textarea>
+                    <script>
+                      $("textarea#wr_content[maxlength]").live("keyup change", function () {
+                        var str = $(this).val()
+                        var mx = parseInt($(this).attr("maxlength"))
+                        if (str.length > mx) {
+                          $(this).val(str.substr(0, mx));
+                          return false;
+                        }
+                      });
+                    </script>
+                  </div>
+                  <div tabindex="14" class="comment-cell comment-submit" onclick="apms_comment('viewcomment');" onkeydown="apms_comment_onKeyDown();"
+                    id="btn_submit">
+                    등록
+                  </div>
+                  <script>
+                    function apms_comment_onKeyDown() {
+                      if (event.keyCode == 13) {
+                        apms_comment('viewcomment');
+                      }
+                    }
+                  </script>
+                </div>
+  
+                
+  
+              
+  
+              </div>
+            </form>
+          </div>
+  
+  
+
+  
+          
+  
+        </div>
+        <!-- Print-Hide -->
+  
+  
+        <style>
+          .atwho-view {
+            /*display:block !important;*/
+            font-size: 13px !important;
+            min-width: 150px !important;
+          }
+  
+          .no_mb_img {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            vertical-align: middle;
+            background: url(http://yjsosic.com/skin/board/Miso-Basic/view/talk_mention_v1.2/img/no_mb_img.png);
+          }
+        </style>
+  
+        <script src="http://yjsosic.com/js/md5.js"></script>
+  
+        <div class="clearfix"></div>
+  
+        <div class="view-btn text-right">
+          <div class="btn-group" role="group">
+            <a role="button" href="./password.php?w=d&amp;bo_table=community_1&amp;wr_id=86&amp;page=" class="btn btn-black btn-sm" title="삭제"
+              onclick="del(this.href); return false;">
+              <i class="fa fa-times"></i>
+              <span class="hidden-xs"> 삭제</span>
+            </a>
+            <a role="button" href="./password.php?w=u&amp;bo_table=community_1&amp;wr_id=86&amp;page=" class="btn btn-black btn-sm" title="수정">
+              <i class="fa fa-plus"></i>
+              <span class="hidden-xs"> 수정</span>
+            </a>
+            <a role="button" (click)="goBack()" class="btn btn-black btn-sm">
+              <i class="fa fa-bars"></i>
+              <span class="hidden-xs"> 목록</span>
+            </a>
+            <a role="button" href="./write.php?w=r&amp;bo_table=community_1&amp;wr_id=86" class="btn btn-black btn-sm">
+              <i class="fa fa-commenting"></i>
+              <span class="hidden-xs"> 답변</span>
+            </a>
+            <a role="button" href="./write.php?bo_table=community_1" class="btn btn-color btn-sm">
+              <i class="fa fa-pencil"></i>
+              <span class="hidden-xs"> 글쓰기</span>
+            </a>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      
+  
+      
+  
+  
+  
+  
+  
+  
+  
+      <!-- } 게시판 목록 끝 -->
+  
+      <div class="h20"></div>
+      <script src="http://yjsosic.com/js/sns.js"></script>
+    </div>
+  </div>

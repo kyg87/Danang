@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var tasks = require('./routes/tasks');
 var boards = require('./routes/boards');
-
+var humors = require('./routes/humors');
 var port = 3000;
 
 var app = express();
@@ -33,6 +33,7 @@ app.use(function (req, res, next) {
 
 app.use('/api', tasks);
 app.use('/api',boards);
+app.use('/api',humors);
 
 app.get('*',(req, res) => {
     res.sendFile(path.join(__dirname, 'client/dist/index.html'));

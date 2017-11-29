@@ -15,6 +15,10 @@ export class BoardService{
         .map(res=>res.json());
     }
 
+    getBoard(id){
+        return this.http.get('http://localhost:3000/api/board/'+id).map(res=>res.json());
+    }
+
     addBoard(newBoard){
         var headers = new Headers();
 

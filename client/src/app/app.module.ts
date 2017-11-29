@@ -11,6 +11,8 @@ import { MainComponent } from './main/main.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { WriteComponent } from './write/write.component';
 import { BoardComponent } from './board/board.component';
+import { HumorComponent } from './humor/humor.component';
+import { HumorboardComponent } from './humorboard/humorboard.component';
 
 
 
@@ -22,7 +24,9 @@ import { BoardComponent } from './board/board.component';
     FreeboardComponent,
     MainComponent,
     WriteComponent,
-    BoardComponent
+    BoardComponent,
+    HumorComponent,
+    HumorboardComponent
   ],
   imports: [
     BrowserModule,
