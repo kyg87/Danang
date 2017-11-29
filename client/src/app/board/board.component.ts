@@ -15,8 +15,8 @@ export class BoardComponent implements OnInit {
   board = new  Board();
 
   constructor(
-    private route : ActivatedRoute,
     private boardService : BoardService,
+    private route : ActivatedRoute,
     private location : Location
   ) { }
 
