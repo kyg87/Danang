@@ -63,7 +63,8 @@
             <ul id="list-body" class="list-body">
 
                 <li *ngFor="let board of boards" class="list-item" [routerLink]="['/board', board._id]" (click)="showBoard(board)">
-                  <div class="wr-num hidden-xs">1</div>
+                  <div style="overflow: hidden;
+                  text-overflow: ellipsis;" class="wr-num hidden-xs">1</div>
                   <div class="wr-subject">
                     <a  class="item-subject">
                       <span class="wr-icon wr-new"></span> {{board.title}} </a>

@@ -58,7 +58,7 @@
   
         <div class="view-content">
             <div *ngFor = "let img of data?.imgs">
-              <img src ="{{img.src}}">
+              <img style="width: 100%" src ="{{img.src}}">
             </div>
         </div>
   
@@ -215,6 +215,12 @@
               <i class="fa fa-pencil"></i>
               <span class="hidden-xs"> 글쓰기</span>
             </a>
+
+            <a id="sortLabel" role="button" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+              class="btn btn-black btn-sm">
+              <i class="fa fa-sort"></i> 정렬 </a>
+            <a role="button" routerLink="/write" class="btn btn-color btn-sm">
+              <i class="fa fa-pencil"></i> 글쓰기</a>
           </div>
           <div class="clearfix"></div>
         </div>

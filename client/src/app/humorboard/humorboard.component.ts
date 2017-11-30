@@ -55,13 +55,13 @@ export class HumorboardComponent implements OnInit {
    }
    
     this.router.events.subscribe((evt) => {
-   
-         // trick the Router into believing it's last link wasn't previously loaded
-         this.router.navigated = false;
-         // if you need to scroll back to top, here is the right place
-         window.scrollTo(0, 0);
-     
-  });
+
+      // trick the Router into believing it's last link wasn't previously loaded
+      this.router.navigated = false;
+      // if you need to scroll back to top, here is the right place
+      window.scrollTo(0, 0);
+
+    });
   }
   ngOnInit() {
   }

@@ -7,3 +7,10 @@ export class Board{
     type : string;
 
 }
+
+export class Main{
+    
+    title : string;
+    img:string;
+  
+  }

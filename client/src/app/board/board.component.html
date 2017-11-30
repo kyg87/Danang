@@ -161,338 +161,9 @@
         </div>
 
 
-        <script>		
-          $('#vcmt_anchor').scrollTop($('#vcmt_anchor').prop('scrollHeight'));
+        
 
-          jQuery.fn.putCursorAtEnd = function () {
-            return this.each(function () {
-
-              var $el = $(this),
-                el = this;
-
-              if (!$el.is(":focus")) {
-                $el.focus();
-              }
-
-              // If this function exists... (IE 9+)
-              if (el.setSelectionRange) {
-
-                var len = $el.val().length * 2;
-                setTimeout(function () {
-                  el.setSelectionRange(len, len);
-                }, 1);
-
-              } else {
-
-                $el.val($el.val());
-
-              }
-
-              // Scroll to the bottom, in case we're in a tall textarea
-              // (Necessary for Firefox and Chrome)
-              //this.scrollTop = 999999;
-
-            });
-          };
-
-
-          jQuery(document).on("keydown", "#wr_content", function (e) {
-            if (e.keyCode === 9) { //Tab
-              e.preventDefault(); //이벤트 동작중단
-              jQuery("#wcmt_btn_submit").focus();
-            }
-          });
-
-          var save_before = '';
-          var save_html = document.getElementById('vbo_wcmt').innerHTML;
-
-          function good_and_write() {
-            var f = document.fviewcomment;
-            if (fviewcomment_submit(f)) {
-              f.is_good.value = 1;
-              f.submit();
-            } else {
-              f.is_good.value = 0;
-            }
-          }
-
-          function fviewcomment_submit(f) {
-            var pattern = /(^\s*)|(\s*$)/g; // \s 공백 문자
-
-            f.is_good.value = 0;
-
-            var subject = "";
-            var content = "";
-            $.ajax({
-              url: g5_bbs_url + "/ajax.filter.php",
-              type: "POST",
-              data: {
-                "subject": "",
-                "content": f.wr_content.value
-              },
-              dataType: "json",
-              async: false,
-              cache: false,
-              success: function (data, textStatus) {
-                subject = data.subject;
-                content = data.content;
-              }
-            });
-
-            if (content) {
-              alert("내용에 금지단어('" + content + "')가 포함되어있습니다");
-              f.wr_content.focus();
-              return false;
-            }
-
-            // 양쪽 공백 없애기
-            var pattern = /(^\s*)|(\s*$)/g; // \s 공백 문자
-            document.getElementById('wr_content').value = document.getElementById('wr_content').value.replace(pattern, "");
-            if (char_min > 0 || char_max > 0) {
-              check_byte('wr_content', 'char_count');
-              var cnt = parseInt(document.getElementById('char_count').innerHTML);
-              if (char_min > 0 && char_min > cnt) {
-                alert("댓글은 " + char_min + "글자 이상 쓰셔야 합니다.");
-                return false;
-              } else if (char_max > 0 && char_max < cnt) {
-                alert("댓글은 " + char_max + "글자 이하로 쓰셔야 합니다.");
-                return false;
-              }
-            }
-            else if (!document.getElementById('wr_content').value) {
-              alert("댓글을 입력하여 주십시오.");
-              return false;
-            }
-
-            if (typeof (f.wr_name) != 'undefined') {
-              f.wr_name.value = f.wr_name.value.replace(pattern, "");
-              if (f.wr_name.value == '') {
-                alert('이름이 입력되지 않았습니다.');
-                f.wr_name.focus();
-                return false;
-              }
-            }
-
-            if (typeof (f.wr_password) != 'undefined') {
-              f.wr_password.value = f.wr_password.value.replace(pattern, "");
-              if (f.wr_password.value == '') {
-                alert('비밀번호가 입력되지 않았습니다.');
-                f.wr_password.focus();
-                return false;
-              }
-            }
-
-            if (!chk_captcha()) return false;
-
-            set_comment_token(f);
-
-            document.getElementById("btn_submit").disabled = "disabled";
-
-            return true;
-          }
-
-          function comment_box(comment_id, work) {
-            var el_id,
-              form_el = 'fviewcomment',
-              respond = document.getElementById(form_el);
-
-            // 댓글 아이디가 넘어오면 답변, 수정
-            if (comment_id) {
-              if (work == 'c')
-                el_id = 'reply_' + comment_id;
-              else
-                el_id = 'edit_' + comment_id;
-            }
-            else
-              el_id = 'vbo_wcmt';
-
-            var comm = document.getElementById(el_id);
-
-            if (save_before != el_id) {
-              if (save_before) {
-                document.getElementById(save_before).style.display = 'none';
-                document.getElementById(save_before).innerHTML = '';
-              }
-
-              comm.style.display = '';
-              comm.appendChild(respond);
-
-              //IE  에서 댓글 수정시 403에러 재정의
-              document.getElementById(el_id).style.display = '';
-              document.getElementById(el_id).innerHTML = save_html;
-
-
-              // 댓글 수정
-              if (work == 'cu') {
-                document.getElementById('wr_content').value = document.getElementById('save_comment_' + comment_id).value;
-                if (typeof char_count != 'undefined')
-                  check_byte('wr_content', 'char_count');
-                if (document.getElementById('secret_comment_' + comment_id).value)
-                  document.getElementById('wr_secret').checked = true;
-                else
-                  document.getElementById('wr_secret').checked = false;
-              }
-
-              document.getElementById('comment_id').value = comment_id;
-              document.getElementById('w').value = work;
-
-              // 페이지
-              if (comment_id) {
-                document.getElementById('comment_page').value = document.getElementById('comment_page_' + comment_id).value;
-                document.getElementById('comment_url').value = document.getElementById('comment_url_' + comment_id).value;
-              } else {
-                document.getElementById('comment_page').value = '';
-                document.getElementById('comment_url').value = './view_comment.page.php?bo_table=community_1&wr_id=86&crows=20';
-              }
-
-              if (save_before)
-                $("#captcha_reload").trigger("click");
-
-              save_before = el_id;
-              $("#" + el_id).find("textarea").autogrow();
-            }
-          }
-
-          comment_box('', 'c'); // 댓글 입력폼이 보이도록 처리하기위해서 추가 (root님)
-
-          function comment_delete() {
-            return confirm("이 댓글을 삭제하시겠습니까?");
-          }
-
-          function mention_comment_box(comment_id, work, target_nick) {    //멘션추가
-
-            var vbo_wcmt = "vbo_wcmt";
-            $vbo_wcmt = $("#" + vbo_wcmt),
-              form_el = 'fviewcomment';
-
-            $vbo_wcmt.show();
-
-            save_before = 'vbo_wcmt';
-
-            if (!$vbo_wcmt.find("#" + form_el).length) {
-              $vbo_wcmt.append($("#" + form_el));
-            }
-
-            console.log("높이" + $vbo_wcmt.offset().top);
-
-            var scroll_top = $vbo_wcmt.offset().top,
-              animate_complete = function () {
-
-                $("#" + form_el).find("#wr_content").val("@" + target_nick + " ").putCursorAtEnd().trigger('focus');
-
-                // 해당 답변 아래에 붙음
-                document.getElementById('comment_id').value = comment_id;
-                document.getElementById('w').value = work;
-
-                $vbo_wcmt.find("textarea").autogrow();
-              };
-
-            if ($(window).scrollTop() == scroll_top || g5_is_mobile) {
-              animate_complete();
-            } else {
-              $("html,body").animate({ scrollTop: scroll_top }, {
-                duration: 500,
-                complete: animate_complete
-              });
-            }
-          }
-
-        </script>
-
-        <script type="text/javascript">
-          (function ($) {
-            var cachequeryMentions = [],
-              itemsMentions = null,
-              data_url = "http://yjsosic.com/skin/board/Miso-Basic/view/talk_mention_v1.2/mention.php",
-              limit = (typeof g5_is_mobile != "undefined" && g5_is_mobile) ? 4 : 10;
-
-            $('#wr_content').atwho({
-              at: "@",
-              data: null,
-              displayTpl: "<li>${img} ${name} </li>",
-              limit: limit,
-              callbacks: {
-                filter: function (query, data, searchKey) {
-                  var _results, i, item, len;
-                  _results = [];
-
-                  return _results;
-                },
-                remoteFilter: function (query, render_view) {
-                  var thisVal = query,
-                    self = $(this);
-                  if (!self.data('active') && thisVal.length >= 1) {
-                    self.data('active', true);
-                    itemsMentions = cachequeryMentions[thisVal]
-                    if (typeof itemsMentions == "object") {
-                      render_view(itemsMentions);
-                    } else {
-                      if (self.xhr) {
-                        self.xhr.abort();
-                      }
-                      self.xhr = $.getJSON(data_url, {
-                        s: thisVal
-                      }, function (data) {
-                        cachequeryMentions[thisVal] = data;
-                        render_view(data);
-                      });
-                    }
-                    self.data('active', false);
-                  }
-                },
-                sorter: function (query, items, searchKey) {
-                  var _results, i, item, len;
-                  if (!query) {
-                    return items;
-                  }
-                  _results = [];
-
-                  for (i = 0, len = items.length; i < len; i++) {
-                    item = items[i];
-                    //console.log(item);
-                    item.atwho_order = new String(item[searchKey]).toLowerCase().indexOf(query.toLowerCase());
-                    var pattern = /([ㄱ-ㅎ])/i;     //한글 초성은 체크하지 않습니다.
-                    if (pattern.test(query)) {
-                      _results.push(item);
-                    } else {
-                      if (item.atwho_order > -1) {
-                        _results.push(item);
-                      }
-                    }
-                  }
-                  return _results.sort(function (a, b) {
-                    return a.atwho_order - b.atwho_order;
-                  });
-                },
-                matcher: function (flag, subtext, should_startWithSpace, acceptSpaceBar) {
-                  var _a, _y, match, regexp, space;
-                  flag = flag.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-                  if (should_startWithSpace) {
-                    flag = '(?:^|\\s)' + flag;
-                  }
-                  _a = decodeURI("%C3%80");
-                  _y = decodeURI("%C3%BF");
-                  space = acceptSpaceBar ? "\ " : "";
-                  regexp = new RegExp(flag + "([가-힣ㄱ-ㅎA-Za-z" + _a + "-" + _y + "0-9_" + space + "\'\.\+\-]*)$|" + flag + "([^\\x00-\\xff]*)$", 'gi');
-                  match = regexp.exec(subtext);
-
-                  if (match) {
-                    return match[2] || match[1];
-                  } else {
-                    return null;
-                  }
-                },
-              }
-            });
-          })(jQuery);
-
-          $(function () {
-            $("#wr_content").autogrow();
-            //resize_comment_image(500);
-          });
-
-        </script>
-
+        
       </div>
       <!-- Print-Hide -->
 
@@ -519,12 +190,11 @@
 
       <div class="view-btn text-right">
         <div class="btn-group" role="group">
-          <a role="button" href="./password.php?w=d&amp;bo_table=community_1&amp;wr_id=86&amp;page=" class="btn btn-black btn-sm" title="삭제"
-            onclick="del(this.href); return false;">
+          <a data-toggle="modal" data-target="#myModal" role="button"  class="btn btn-black btn-sm" title="삭제">
             <i class="fa fa-times"></i>
             <span class="hidden-xs"> 삭제</span>
           </a>
-          <a role="button" href="./password.php?w=u&amp;bo_table=community_1&amp;wr_id=86&amp;page=" class="btn btn-black btn-sm" title="수정">
+          <a role="button" [routerLink]="['/write', board._id]" class="btn btn-black btn-sm" title="수정">
             <i class="fa fa-plus"></i>
             <span class="hidden-xs"> 수정</span>
           </a>
@@ -545,7 +215,31 @@
       </div>
     </div>
     
-
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+          Launch demo modal
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+    </div>
     
 
 

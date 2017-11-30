@@ -5,7 +5,7 @@ var mongojs = require('mongojs');
 var db = mongojs('mongodb://dridy:fkawk1@ds121906.mlab.com:21906/danang',['boards']);
 
 router.get('/boards', function(req, res, next){
-    db.boards.find(function(err, boards){
+    db.boards.find().sort({ '_id': -1 }).toArray(function(err, boards){
         if(err){
             res.send(err);
         }

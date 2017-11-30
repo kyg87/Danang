@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BoardService } from '../services/board.service';
 import { Board } from '../model/board';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
@@ -17,8 +17,24 @@ export class BoardComponent implements OnInit {
   constructor(
     private boardService : BoardService,
     private route : ActivatedRoute,
-    private location : Location
-  ) { }
+    private location : Location,
+    private router : Router
+  ) {
+
+
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+      return false;
+   }
+   
+    this.router.events.subscribe((evt) => {
+
+      // trick the Router into believing it's last link wasn't previously loaded
+      this.router.navigated = false;
+      // if you need to scroll back to top, here is the right place
+      window.scrollTo(0, 0);
+
+    });
+   }
 
   ngOnInit() {
     this.getBoard();
