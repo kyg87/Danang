@@ -14,7 +14,7 @@ import { BoardComponent } from './board/board.component';
 import { HumorComponent } from './humor/humor.component';
 import { HumorboardComponent } from './humorboard/humorboard.component';
 
-
+import { FileUploadModule  } from 'ng2-file-upload';
 
 
 @NgModule({
@@ -31,7 +31,8 @@ import { HumorboardComponent } from './humorboard/humorboard.component';
   imports: [
     BrowserModule,
     HttpModule,FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FileUploadModule
   ],
   providers: [],
   bootstrap: [AppComponent]

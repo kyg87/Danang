@@ -31,6 +31,7 @@ export class MainComponent implements OnInit {
     // this.boardService.getBoards(1,6).subscribe(data={
 
     // })
+    
   }
 
   onCompleteGetHumors(data){

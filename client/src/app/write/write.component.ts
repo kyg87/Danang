@@ -4,6 +4,8 @@ import { Board } from '../model/board';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { FileUploader } from 'ng2-file-upload';
+
 
 @Component({
   selector: 'app-write',
@@ -13,6 +15,9 @@ import { Location } from '@angular/common';
 export class WriteComponent implements OnInit {
 
   board  = new Board();
+
+  filePath : any;
+  public uploader:FileUploader = new FileUploader({url:'http://localhost:3000/upload'});
 
   constructor(
     private boardService: BoardService,
@@ -26,17 +31,40 @@ export class WriteComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
 
     console.log(id);
+
+    this.uploader.onSuccessItem = ((item: any, response: any, status: any, headers: any) =>{
+      var responePath = JSON.parse(response);
+      console.log(response, responePath);
+      this.filePath = responePath.filePath;
+    })
   }
 
   ngOnInit() {
   }
 
   addBoard(){
-    console.log(this.board);
-    this.boardService.addBoard(this.board).subscribe(board=>{
+    
 
-      this.onCompleteAddBoard(board);
-    })
+
+    var file = this.uploader.getNotUploadedItems();
+
+    console.log(file);
+
+    
+    if(this.filePath != undefined){
+      this.board.filePath = "http://localhost:3000/users/"+ this.filePath;
+    }
+    
+
+    console.log(this.board);
+    
+    // this.boardService.addBoard(this.board).subscribe(board=>{
+
+    //   this.onCompleteAddBoard(board);
+    // })
+
+
+
   }
   onCompleteAddBoard(data){
     console.log(data);

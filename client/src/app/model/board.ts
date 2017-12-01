@@ -5,6 +5,7 @@ export class Board{
     writer : string;
     date : Date;
     type : string;
+    filePath : string;
 
 }
 
