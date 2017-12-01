@@ -11,18 +11,18 @@ export class BoardService{
     }
 
     getBoards(){
-        return this.http.get('http://localhost:3000/api/boards')
+        return this.http.get('http://localhost/api/boards')
         .map(res=>res.json());
     }
 
     getBoard(id){
-        return this.http.get('http://localhost:3000/api/board/'+id).map(res=>res.json());
+        return this.http.get('http://localhost/api/board/'+id).map(res=>res.json());
     }
 
     addBoard(newBoard){
         var headers = new Headers();
 
         headers.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3000/api/board',JSON.stringify(newBoard),{headers :headers}).map(res =>res.json());
+        return this.http.post('http://localhost/api/board',JSON.stringify(newBoard),{headers :headers}).map(res =>res.json());
     }
 }
