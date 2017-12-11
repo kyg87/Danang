@@ -25,7 +25,7 @@ router.get('/humors', function(req, res, next){
      
      
 
-        db.humorbook.find().sort({ '_id': 1 }).skip((parseInt(req.query.page) - 1) * req.query.size).limit(parseInt(req.query.size)).toArray(function(err, result) {
+        db.humorbook.find().sort({ '_id': -1 }).skip((parseInt(req.query.page) - 1) * req.query.size).limit(parseInt(req.query.size)).toArray(function(err, result) {
             if (err) throw err;
             
             res.json({page : pageNum, value : result})

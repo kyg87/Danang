@@ -15,6 +15,7 @@ import { HumorComponent } from './humor/humor.component';
 import { HumorboardComponent } from './humorboard/humorboard.component';
 
 import { FileUploadModule  } from 'ng2-file-upload';
+import { EditComponent } from './edit/edit.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { FileUploadModule  } from 'ng2-file-upload';
     WriteComponent,
     BoardComponent,
     HumorComponent,
-    HumorboardComponent
+    HumorboardComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,

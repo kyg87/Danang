@@ -11,12 +11,12 @@ export class HumorService{
     }
 
     getHumors(page ,size){
-        return this.http.get('http://localhost/api/humors?page='+page + '&size='+ size)
+        return this.http.get('http://localhost:3000/api/humors?page='+page + '&size='+ size)
         .map(res=>res.json());
     }
 
     getHumor(id){
-        return this.http.get('http://localhost/api/humor/'+id).map(res=>res.json());
+        return this.http.get('http://localhost:3000/api/humor/'+id).map(res=>res.json());
     }
 
     // addBoard(newBoard){

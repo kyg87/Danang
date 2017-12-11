@@ -62,7 +62,7 @@
             </div>
             <ul id="list-body" class="list-body">
 
-                <li *ngFor="let board of boards" class="list-item" [routerLink]="['/board', board._id]" (click)="showBoard(board)">
+                <li *ngFor="let board of data?.value" class="list-item" [routerLink]="['/board', board._id]" (click)="showBoard(board)">
                   <div style="overflow: hidden;
                   text-overflow: ellipsis;" class="wr-num hidden-xs">1</div>
                   <div class="wr-subject">
@@ -144,13 +144,28 @@
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
+              <li   *ngFor = "let pageNo of pages;let first = first;" [ngClass] = "{ active : pageNo == page}">
+                  <a [routerLink]="['/freeboard', pageNo]" >{{pageNo}}</a>
+          
+                  
+              </li>
+              <!-- <li class="active">
+                <a href="#">1</a>
+              </li>
               <li>
-                <a href="#" aria-label="Next">
+                <a href="#">2</a>
+              </li>
+              <li>
+                <a href="#">3</a>
+              </li>
+              <li>
+                <a href="#">4</a>
+              </li>
+              <li>
+                <a href="#">5</a>
+              </li> -->
+              <li>
+                <a [routerLink]="['/freeboard', endPageNo+1]" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                 </a>
               </li>

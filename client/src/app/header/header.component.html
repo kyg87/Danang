@@ -20,12 +20,12 @@
         </button>
         <a class="navbar-brand" href="#">Brand</a>
       </div>
-  
+      <a href="http://naver.com"></a>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li class="active"><a href="#"> <span class="glyphicon glyphicon-home"></span></a></li>
-          <li><a routerLink="/freeboard">자유게시판</a></li>
+          <li><a [routerLink]="['/freeboard', 1]">자유게시판</a></li>
           <li><a [routerLink]="['/humorboard', 1]">유머</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>

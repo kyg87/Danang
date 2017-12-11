@@ -57,7 +57,7 @@
       </div>
 
       <div class="view-content">
-        <div>
+        <div *ngIf = "board.filePath != null">
           <img width="100%" src="{{board.filePath}}">
         </div>
         <div>
@@ -193,18 +193,18 @@
       <script src="http://yjsosic.com/js/md5.js"></script>
 
       <div class="clearfix"></div>
-
+      <a href="http://motherbirds.com" style="color: red">motherbirds.com</a> 
       <div class="view-btn text-right">
         <div class="btn-group" role="group">
           <a data-toggle="modal" data-target="#myModal" role="button"  class="btn btn-black btn-sm" title="삭제">
             <i class="fa fa-times"></i>
             <span class="hidden-xs"> 삭제</span>
           </a>
-          <a role="button" [routerLink]="['/write', board._id]" class="btn btn-black btn-sm" title="수정">
+          <a role="button" [routerLink]="['/edit', board._id]" class="btn btn-black btn-sm" title="수정">
             <i class="fa fa-plus"></i>
             <span class="hidden-xs"> 수정</span>
           </a>
-          <a role="button" routerLink="/freeboard" class="btn btn-black btn-sm">
+          <a role="button"(click)="goBack()" class="btn btn-black btn-sm">
             <i class="fa fa-bars"></i>
             <span class="hidden-xs"> 목록</span>
           </a>
@@ -241,7 +241,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary" (click)="deleteBoard()" >Save changes</button>
               </div>
             </div>
           </div>

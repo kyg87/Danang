@@ -48,6 +48,14 @@ export class BoardComponent implements OnInit {
     })
   }
 
+  deleteBoard(){
+    const id = this.route.snapshot.paramMap.get('id');
+    this.boardService.deleteBoard(id).subscribe(data=>{
+      console.log(data);
+      this.location.back();
+    })
+  }
+
   goBack(){
     this.location.back();
   }
