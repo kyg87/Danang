@@ -3,6 +3,10 @@ import { BoardService } from '../services/board.service';
 import { Board } from '../model/board';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import  '../../assets/sketch.js';
+
+
+declare var p5: any;
 
 @Component({
   selector: 'app-freeboard',
@@ -47,6 +51,8 @@ export class FreeboardComponent implements OnInit {
 
 
   ngOnInit() {
+
+      
   }
 
   showBoard(event){

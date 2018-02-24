@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mongojs = require('mongojs');
 
-var db = mongojs('mongodb://dridy:fkawk1@ds121906.mlab.com:21906/danang',['humorbook']);
+//var db = mongojs('mongodb://dridy:fkawk1@ds121906.mlab.com:21906/danang',['humorbook']);
+var db = mongojs('mongodb://dridy:1234@ds013475.mlab.com:13475/heroku_4s0bvwj7',['humorbook']);
 
 router.get('/humors', function(req, res, next){
 
