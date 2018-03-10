@@ -8,6 +8,13 @@ var tasks = require('./routes/tasks');
 var boards = require('./routes/boards');
 var humors = require('./routes/humors');
 var bodygall = require('./routes/bodygall');
+var star = require('./routes/star');
+var event = require('./routes/event');
+var mypage = require('./routes/mypage');
+var filejo = require('./routes/filejo');
+var j_caeyul = require('./routes/j_caeyul');
+var he_le_n_= require('./routes/he_le_n_');
+var partner = require('./routes/partner');
 var port = 3000;
 
 var app = express();
@@ -62,7 +69,16 @@ app.post('/upload', function (req, res) {
 app.use('/api', tasks);
 app.use('/api',boards);
 app.use('/api',humors);
-app.use('/api',bodygall)
+app.use('/api',bodygall);
+app.use('/api',star);
+app.use('/api',event);
+app.use('/api',mypage);
+app.use('/api',filejo);
+app.use('/api',j_caeyul);
+app.use('/api',he_le_n_);
+
+app.use('/klpnet', partner)
+
 app.use('/users', express.static('uploads'));
 app.get('/game01', function(req, res){
     res.render('pages/game.html')
