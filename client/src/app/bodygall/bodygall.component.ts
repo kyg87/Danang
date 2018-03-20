@@ -1,21 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HumorService } from '../services/humor.service'
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { parse } from 'url';
-import { Parser } from '@angular/compiler/src/ml_parser/parser';
 
 @Component({
-  inputs: ['page','id'],
-  selector: 'app-humorboard',
-  templateUrl: './humorboard.component.html',
-  styleUrls: ['./humorboard.component.css']
+  selector: 'app-bodygall',
+  templateUrl: './bodygall.component.html',
+  styleUrls: ['./bodygall.component.css']
 })
-export class HumorboardComponent implements OnInit {
+export class BodygallComponent implements OnInit {
 
-  id : any;
-  selectMenu: any;
   data : any;
 
   page : number;
@@ -31,23 +26,14 @@ export class HumorboardComponent implements OnInit {
     private location : Location,
     private router : Router
   ) { 
-    
-  }
-  ngOnInit() {
-    
-    console.log(this.id);
-    var page = this.route.snapshot.paramMap.get('page');
+    const page = this.route.snapshot.paramMap.get('page');
 
-    if(page != null) {
-      this.page = parseInt(page);
-    }
+    this.page = parseInt(page);
 
-    this.humorService.getHumors(page,10).subscribe(data=>{
+    this.humorService.getBodyGalls(page,10).subscribe(data=>{
 
-      
       console.log(data);
       this.totalPage = data.page;
-
       this.data = data;
 
       console.log(this.getCurrentPageGroup());
@@ -76,6 +62,8 @@ export class HumorboardComponent implements OnInit {
       window.scrollTo(0, 0);
 
     });
+  }
+  ngOnInit() {
   }
 
   getCurrentPageGroup(){
@@ -116,9 +104,5 @@ export class HumorboardComponent implements OnInit {
 
   }
 
-  onSelect(menu){
-    this.selectMenu = menu;
-    console.log(this.selectMenu);
-  }
-
 }
+

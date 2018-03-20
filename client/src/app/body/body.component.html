@@ -1,5 +1,8 @@
 <div class="container">
   <div class="at-content-main">
+
+
+
     <style>
       .amina-header {
         line-height: 22px;
@@ -26,9 +29,13 @@
       </div>
     </div>
     <script src="http://yjsosic.com/js/viewimageresize.js"></script>
+
     <div class="view-wrap">
+
+
       <h1>
         {{data?.title}}</h1>
+
       <div class="panel panel-default view-head no-attach">
         <div class="panel-heading">
           <div class="font-12 text-muted">
@@ -36,8 +43,8 @@
             <a href="javascript:;" onclick="showSideView(this, '', '김', '', '');">
               <span class="guest">writer</span>
             </a>
-
-
+            
+       
             <span class="hidden-xs pull-right">
               <i class="fa fa-clock-o"></i>
               19분전 </span>
@@ -49,10 +56,10 @@
       <div class="view-img">
       </div>
 
-      <div class="view-content" style="text-align: center">
-        <div *ngFor="let img of data?.imgs">
-          <img style="max-width: -webkit-fill-available" src="{{img.src}}">
-        </div>
+      <div class="view-content">
+          <div *ngFor = "let img of data?.imgs">
+            <img style="max-width: -webkit-fill-available" src ="{{img.src}}">
+          </div>
       </div>
 
 
@@ -73,6 +80,13 @@
         </div>
         <div class="clearfix"></div>
       </div>
+
+
+      <script>
+        // 글자수 제한
+        var char_min = parseInt(0); // 최소
+        var char_max = parseInt(0); // 최대
+      </script>
 
       <script src="//code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
       <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -107,55 +121,54 @@
             <input type="hidden" name="crows" value="20">
             <input type="hidden" name="page" value="" id="comment_page">
             <input type="hidden" name="is_good" value="">
-
-
             <div class="comment-box">
               <div class="pull-left help-block hidden-xs">
                 <i class="fa fa-commenting-o"></i> 상업광고, 인신공격, 비방, 욕설 등은 임의로 삭제될 수 있으며 형사처벌의 대상이 됩니다.
               </div>
-              <div class="clearfix"></div>
-              <div class="form-group row">
-                <div class="col-xs-6">
-                  <label for="wr_name" class="sound_only">이름
-                    <strong class="sound_only"> 필수</strong>
-                  </label>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      <i class="fa fa-user gray"></i>
-                    </span>
-                    <input type="text" name="wr_name" value="" id="wr_name" class="form-control input-sm" size="5" maxlength="20" placeholder="이름">
-                  </div>
-                </div>
-                <div class="col-xs-6">
-                  <label for="wr_password" class="sound_only">비밀번호
-                    <strong class="sound_only"> 필수</strong>
-                  </label>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      <i class="fa fa-lock gray"></i>
-                    </span>
-                    <input type="password" name="wr_password" id="wr_password" class="form-control input-sm" size="10" maxlength="20" placeholder="비밀번호">
-                  </div>
-                </div>
-              </div>
+  
 
               <div class="form-group comment-content">
                 <div class="comment-cell">
-                  <textarea tabindex="13" id="wr_content" name="wr_content" maxlength="10000" rows="5" class="form-control input-sm" title="내용"></textarea>
-
+                  <textarea tabindex="13" id="wr_content" name="wr_content" maxlength="10000" rows="5" class="form-control input-sm" title="내용"
+                    style="height: 90px;"></textarea>
+                  <script>
+                    $("textarea#wr_content[maxlength]").live("keyup change", function () {
+                      var str = $(this).val()
+                      var mx = parseInt($(this).attr("maxlength"))
+                      if (str.length > mx) {
+                        $(this).val(str.substr(0, mx));
+                        return false;
+                      }
+                    });
+                  </script>
                 </div>
-                <div tabindex="14" class="comment-cell comment-submit" onclick="apms_comment_submit();" onkeydown="apms_comment_onKeyDown();"
+                <div tabindex="14" class="comment-cell comment-submit" onclick="apms_comment('viewcomment');" onkeydown="apms_comment_onKeyDown();"
                   id="btn_submit">
                   등록
                 </div>
+                <script>
+                  function apms_comment_onKeyDown() {
+                    if (event.keyCode == 13) {
+                      apms_comment('viewcomment');
+                    }
+                  }
+                </script>
               </div>
 
+              
+
+            
 
             </div>
           </form>
         </div>
-      </div>
 
+
+
+
+        
+
+      </div>
       <!-- Print-Hide -->
 
 
@@ -212,11 +225,19 @@
         <div class="clearfix"></div>
       </div>
     </div>
+    
+
+    
+
+
+
+
+
+
 
     <!-- } 게시판 목록 끝 -->
-    {{data?._id}}
+
     <div class="h20"></div>
     <script src="http://yjsosic.com/js/sns.js"></script>
   </div>
 </div>
-<app-humorboard [id] = data?._id ></app-humorboard>

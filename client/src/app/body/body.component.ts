@@ -4,11 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-humor',
-  templateUrl: './humor.component.html',
-  styleUrls: ['./humor.component.css']
+  selector: 'app-body',
+  templateUrl: './body.component.html',
+  styleUrls: ['./body.component.css']
 })
-export class HumorComponent implements OnInit {
+export class BodyComponent implements OnInit {
 
   data : any;
   constructor(
@@ -19,9 +19,8 @@ export class HumorComponent implements OnInit {
   ) { 
 
     const id = this.route.snapshot.paramMap.get('id');
-    const page = this.route.snapshot.paramMap.get('page');
-    console.log('page',page);
-    this.humorService.getHumor(id).subscribe(data=>{
+
+    this.humorService.getBodyGall(id).subscribe(data=>{
 
       console.log(data);
 

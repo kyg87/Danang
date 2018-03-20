@@ -31,6 +31,11 @@
     </div>
 
     <section class="board-list">
+
+
+
+
+
       <div class="list-wrap">
         <form name="fboardlist" id="fboardlist" action="./board_list_update.php" onsubmit="return fboardlist_submit(this);" method="post"
           role="form" class="form">
@@ -62,7 +67,7 @@
                     <div class="imgframe">
                       <div class="img-wrap" style="padding-bottom:75%;">
                         <div *ngFor = "let src of humor.imgs  | slice " class="img-item">
-                          <a [routerLink]="['/humor', page, humor._id]" (click)="onSelect(humor._id)">
+                          <a [routerLink]="['/body', humor._id]">
 
                             <img src="{{src.src}}"
                               alt="">
@@ -75,14 +80,9 @@
                     </div>
                   </div>
                   <div class="">
-                      선택 : {{id}}
                     <h2 class="media-heading">
-                      <a [routerLink]="['/humor', humor._id]" class="ellipsis">
+                      <a [routerLink]="['/body', humor._id]" class="ellipsis">
                         {{humor.title}} </a>
-                    
-                        <div *ngIf = "humor._id == id">
-                            선택
-                        </div>
                     </h2>
                     <div class="list-details text-muted">
                       <span class="hidden-xs">
@@ -158,29 +158,51 @@
 
           <nav class="text-center">
             <ul class="pagination">
-              <li [ngClass] = "{ disable : (page -5) <= 0}" >
-                <a [routerLink]="['/humorboard', startPageNo-5]" aria-label="Previous" >
+              <li>
+                <a href="#" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
               <li   *ngFor = "let pageNo of pages;let first = first;" [ngClass] = "{ active : pageNo == page}">
-                  <a [routerLink]="['/humorboard', pageNo]" >{{pageNo}}</a>                  
+                  <a [routerLink]="['/bodygall', pageNo]" >{{pageNo}}</a>
+          
+                  
               </li>
-
+              <!-- <li class="active">
+                <a href="#">1</a>
+              </li>
               <li>
-                <a [routerLink]="['/humorboard', endPageNo+1]" aria-label="Next">
+                <a href="#">2</a>
+              </li>
+              <li>
+                <a href="#">3</a>
+              </li>
+              <li>
+                <a href="#">4</a>
+              </li>
+              <li>
+                <a href="#">5</a>
+              </li> -->
+              <li>
+                <a [routerLink]="['/bodygall', endPageNo+1]" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                 </a>
               </li>
             </ul>
           </nav>
+
+
+
         </form>
 
+
       </div>
+
+
     </section>
 
     <!-- } 게시판 목록 끝 -->
-    {{id}}
+
     <div class="h20"></div>
     <script src="http://yjsosic.com/js/sns.js"></script>
   </div>

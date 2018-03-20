@@ -16,8 +16,10 @@ import { HumorboardComponent } from './humorboard/humorboard.component';
 
 import { FileUploadModule  } from 'ng2-file-upload';
 import { EditComponent } from './edit/edit.component';
+import { BodygallComponent } from './bodygall/bodygall.component';
+import { BodyComponent } from './body/body.component';
 
-
+import { AdsenseModule } from 'ng2-adsense';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,13 +30,19 @@ import { EditComponent } from './edit/edit.component';
     BoardComponent,
     HumorComponent,
     HumorboardComponent,
-    EditComponent
+    EditComponent,
+    BodygallComponent,
+    BodyComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,FormsModule,
     AppRoutingModule,
-    FileUploadModule
+    FileUploadModule,
+    AdsenseModule.forRoot({
+      adClient: 'ca-pub-2651262364281330',
+      adSlot: 4461430600,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

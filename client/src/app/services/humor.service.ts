@@ -11,12 +11,21 @@ export class HumorService{
     }
 
     getHumors(page ,size){
-        return this.http.get('http://localhost:3000/api/humors?page='+page + '&size='+ size)
+        return this.http.get('http://125.129.60.150:3000/api/star?page='+page + '&size='+ size)
         .map(res=>res.json());
     }
 
     getHumor(id){
-        return this.http.get('http://localhost:3000/api/humor/'+id).map(res=>res.json());
+        return this.http.get('http://125.129.60.150:3000/api/star/'+id).map(res=>res.json());
+    }
+
+    getBodyGalls(page ,size){
+        return this.http.get('http://125.129.60.150:3000/api/bodygall?page='+page + '&size='+ size)
+        .map(res=>res.json());
+    }
+
+    getBodyGall(id){
+        return this.http.get('http://125.129.60.150:3000/api/bodygall/'+id).map(res=>res.json());
     }
 
     // addBoard(newBoard){

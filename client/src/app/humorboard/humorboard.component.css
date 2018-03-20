@@ -551,6 +551,8 @@ blockquote { font-size: 12px; margin:0px 0px 20px; }
 .pagination li a { border-radius:0 !important; color:#333 !important; }
 .pagination li.active a { color:#fff !important; background:#444 !important; border-color:#444 !important; }
 
+.pagination li.disable a { display: none; color:#fff !important; background:#444 !important; border-color:#444 !important; }
+
 /* Table */
 .table > thead > tr > th,
 .table > tbody > tr > th,
