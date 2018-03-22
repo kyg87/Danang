@@ -46,8 +46,6 @@ export class EditComponent implements OnInit {
 
     editBoard(){
 
-      
-
       this.boardService.updateBoard(this.board).subscribe(
         data=>{
           this.onCompleteAddBoard(data);

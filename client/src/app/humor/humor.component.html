@@ -89,15 +89,57 @@
 
       <div id="viewcomment" class="view-comment-box">
         <article class="anb_vbo">
-          <section id="vcmt_anchor" class="vbo_vcmt vbo_vcmt_chat comment-media">
-          </section>
+              <section style="padding: 12px 12px 0px;" id="bo_vc" class="vbo_vcmt vbo_vcmt_chat comment-media">
+                <div  *ngFor = "let reply of replys" class="media" id="c_36">
+                  <div class="photo pull-left">
+                    <div class="media-object">
+                      <i class="fa fa-user"></i>
+                    </div>
+                  </div>
+                  <div class="media-body">
+                    <div class="media-heading">
+                      <b>
+                        <span class="member">{{reply.name}}</span>
+                      </b>
+                      <span class="font-11 text-muted">
+                        <span class="media-info">
+                          <i class="fa fa-clock-o"></i>
+                          <span class="orangered">4분전</span>
+                        </span>
+                      </span>
+                      &nbsp;
+                      <div class="print-hide pull-right font-11 ">
+                        <a href="./board.php?bo_table=education&amp;wr_id=35&amp;c_id=36&amp;w=c#bo_vc_w" onclick="comment_box('36', 'c'); return false;">
+                          <span class="text-muted">답변</span>
+                        </a>
+                        <a href="./board.php?bo_table=education&amp;wr_id=35&amp;c_id=36&amp;w=cu#bo_vc_w" onclick="comment_box('36', 'cu'); return false;">
+                          <span class="text-muted media-btn">수정</span>
+                        </a>
+                        <a href="./delete_comment.php?bo_table=education&amp;comment_id=36&amp;token=15217403315ab3ea2bad239&amp;page=" onclick="return comment_delete();">
+                          <span class="text-muted media-btn">삭제</span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="media-content">
+                        {{reply.content}}
+                      <span id="edit_36"></span>
+                      <!-- 수정 -->
+                      <span id="reply_36"></span>
+                      <!-- 답변 -->
+                      <input type="hidden" value="" id="secret_comment_36">
+                      <textarea id="save_comment_36" style="display:none">1</textarea>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              
 
         </article>
       </div>
 
       <div class="print-hide ">
         <div id="vbo_wcmt">
-          <form id="fviewcomment" name="fviewcomment_wrap_chat" action="./write_comment_update.page.php" onsubmit="return fviewcomment_submit(this);"
+          <form form #replyForm = "ngForm" 
             method="post" autocomplete="off" class="form" role="form">
             <input type="hidden" name="w" value="c" id="w">
             <input type="hidden" name="bo_table" value="community_1">
@@ -108,7 +150,7 @@
             <input type="hidden" name="page" value="" id="comment_page">
             <input type="hidden" name="is_good" value="">
 
-
+           
             <div class="comment-box">
               <div class="pull-left help-block hidden-xs">
                 <i class="fa fa-commenting-o"></i> 상업광고, 인신공격, 비방, 욕설 등은 임의로 삭제될 수 있으며 형사처벌의 대상이 됩니다.
@@ -117,39 +159,38 @@
               <div class="form-group row">
                 <div class="col-xs-6">
                   <label for="wr_name" class="sound_only">이름
-                    <strong class="sound_only"> 필수</strong>
                   </label>
                   <div class="input-group">
                     <span class="input-group-addon">
                       <i class="fa fa-user gray"></i>
                     </span>
-                    <input type="text" name="wr_name" value="" id="wr_name" class="form-control input-sm" size="5" maxlength="20" placeholder="이름">
+                    <input type="text" [(ngModel)] = "reply.name" required name="wr_name" id="wr_name" class="form-control input-sm" size="5" maxlength="20" placeholder="이름">
                   </div>
                 </div>
                 <div class="col-xs-6">
                   <label for="wr_password" class="sound_only">비밀번호
-                    <strong class="sound_only"> 필수</strong>
                   </label>
                   <div class="input-group">
                     <span class="input-group-addon">
                       <i class="fa fa-lock gray"></i>
                     </span>
-                    <input type="password" name="wr_password" id="wr_password" class="form-control input-sm" size="10" maxlength="20" placeholder="비밀번호">
+                    <input type="password" [(ngModel)] = "reply.password" required name="wr_password" id="wr_password" class="form-control input-sm" size="10" maxlength="20" placeholder="비밀번호">
                   </div>
                 </div>
               </div>
 
               <div class="form-group comment-content">
                 <div class="comment-cell">
-                  <textarea tabindex="13" id="wr_content" name="wr_content" maxlength="10000" rows="5" class="form-control input-sm" title="내용"></textarea>
+                  <textarea [(ngModel)] = "reply.content" required tabindex="13" id="wr_content" name="wr_content" maxlength="10000" rows="5" class="form-control input-sm" title="내용"></textarea>
 
                 </div>
-                <div tabindex="14" class="comment-cell comment-submit" onclick="apms_comment_submit();" onkeydown="apms_comment_onKeyDown();"
-                  id="btn_submit">
-                  등록
+               
+                <div tabindex="14" class="comment-cell comment-submit" 
+                  id="btn_submit" (click)="onAdd()">등록
+                  <!-- <input type="submit" value="등록"  > -->
                 </div>
               </div>
-
+              {{reply | json}}
 
             </div>
           </form>
@@ -214,7 +255,6 @@
     </div>
 
     <!-- } 게시판 목록 끝 -->
-    {{data?._id}}
     <div class="h20"></div>
     <script src="http://yjsosic.com/js/sns.js"></script>
   </div>

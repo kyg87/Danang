@@ -42,4 +42,16 @@ export class BoardService{
 
     }
 
+    addReply(reply){
+        var headers = new Headers();
+
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('http://localhost:3000/api/reply',JSON.stringify(reply),{headers :headers}).map(res =>res.json());
+    }
+
+    getReplys(){
+        return this.http.get('http://localhost:3000/api/replys')
+        .map(res=>res.json());
+    }
+
 }

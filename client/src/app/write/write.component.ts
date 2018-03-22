@@ -49,9 +49,6 @@ export class WriteComponent implements OnInit {
    * 첨부파일이 없으면 바로 글 게시
    */
   addBoard(){
-    
-
-
     var file = this.uploader.getNotUploadedItems();
 
     console.log(file.length);
@@ -71,8 +68,6 @@ export class WriteComponent implements OnInit {
     if (this.filePath != undefined) {
       this.board.filePath = "http://localhost:3000/users/" + this.filePath;
     }
-
-
     this.boardService.addBoard(this.board).subscribe(board => {
 
       this.onCompleteAddBoard(board);
