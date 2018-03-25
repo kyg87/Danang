@@ -8,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   selectMenu: any;
-  constructor() { }
+  constructor() { 
+    console.log(this.selectMenu)
+  }
 
   ngOnInit() {
   }

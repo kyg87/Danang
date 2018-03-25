@@ -123,11 +123,12 @@ router.get('/replys', function(req, res, next){
 
         console.log('전체글수 : ' + totalCount);
         console.log('전체페이지수 : ' + pageNum);
+        console.log('replys : ' + req.query.id)
 
      
      
 
-        db.replys.find().sort({ '_id': 1 }).skip((parseInt(req.query.page) - 1) * req.query.size).limit(parseInt(req.query.size)).toArray(function(err, result) {
+        db.replys.find({'id': req.query.id}).sort({ '_id': 1 }).skip((parseInt(req.query.page) - 1) * req.query.size).limit(parseInt(req.query.size)).toArray(function(err, result) {
             if (err) throw err;
             
             res.json({page : pageNum, value : result})

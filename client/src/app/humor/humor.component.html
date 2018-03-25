@@ -18,10 +18,10 @@
     </style>
     <div class="amina-header">
       <span class="header-breadcrumb pull-right text-muted">
-        <i class="fa fa-home"></i> 홈 &gt; 참여공간 &gt; 참여공간 </span>
+        <i class="fa fa-home"></i> 홈 &gt; 스타 </span>
       <div class="div-title-underbar font-18">
         <span class="div-title-underbar-bold border-black">
-          <b>참여공간</b>
+          <b>스타</b>
         </span>
       </div>
     </div>
@@ -61,10 +61,10 @@
       <div class="view-icon">
         <div class="pull-right">
           <div class="form-group">
-            <button onclick="apms_shingo('community_1', '86');" class="btn btn-black btn-xs">
+            <!-- <button onclick="apms_shingo('community_1', '86');" class="btn btn-black btn-xs">
               <i class="fa fa-bell"></i>
               <span class="hidden-xs">신고</span>
-            </button>
+            </button> -->
           </div>
         </div>
         <div class="pull-left">
@@ -82,14 +82,14 @@
       <script src="http://yjsosic.com/skin/board/Miso-Basic/view/talk_mention_v1.2/js/jquery.autogrow.js"></script>
       <script type="text/javascript" src="http://ichord.github.io/Caret.js/src/jquery.caret.js"></script>
 
-      <div class="view-comment font-18 en">
+      <div  class="view-comment font-18 en">
         <i class="fa fa-commenting"></i>
         <span class="orangered">0</span> Comments
       </div>
-
+      
       <div id="viewcomment" class="view-comment-box">
         <article class="anb_vbo">
-              <section style="padding: 12px 12px 0px;" id="bo_vc" class="vbo_vcmt vbo_vcmt_chat comment-media">
+              <section *ngIf = "replys?.length != 0 " style="padding: 12px 12px 0px;" id="bo_vc" class="vbo_vcmt vbo_vcmt_chat comment-media">
                 <div  *ngFor = "let reply of replys" class="media" id="c_36">
                   <div class="photo pull-left">
                     <div class="media-object">
@@ -139,7 +139,7 @@
 
       <div class="print-hide ">
         <div id="vbo_wcmt">
-          <form form #replyForm = "ngForm" 
+          <form   name="myform" 
             method="post" autocomplete="off" class="form" role="form">
             <input type="hidden" name="w" value="c" id="w">
             <input type="hidden" name="bo_table" value="community_1">
@@ -164,7 +164,7 @@
                     <span class="input-group-addon">
                       <i class="fa fa-user gray"></i>
                     </span>
-                    <input type="text" [(ngModel)] = "reply.name" required name="wr_name" id="wr_name" class="form-control input-sm" size="5" maxlength="20" placeholder="이름">
+                    <input type="text" [(ngModel)] = "reply.name" ng-required="true" name="name" id="name"  class="form-control input-sm" size="5" maxlength="20" placeholder="이름">
                   </div>
                 </div>
                 <div class="col-xs-6">
@@ -190,8 +190,6 @@
                   <!-- <input type="submit" value="등록"  > -->
                 </div>
               </div>
-              {{reply | json}}
-
             </div>
           </form>
         </div>
@@ -220,7 +218,7 @@
 
       <div class="clearfix"></div>
 
-      <div class="view-btn text-right">
+      <!-- <div class="view-btn text-right">
         <div class="btn-group" role="group">
           <a role="button" href="./password.php?w=d&amp;bo_table=community_1&amp;wr_id=86&amp;page=" class="btn btn-black btn-sm" title="삭제"
             onclick="del(this.href); return false;">
@@ -251,7 +249,8 @@
             <i class="fa fa-pencil"></i> 글쓰기</a>
         </div>
         <div class="clearfix"></div>
-      </div>
+      </div> -->
+
     </div>
 
     <!-- } 게시판 목록 끝 -->

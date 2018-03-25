@@ -4,7 +4,8 @@ import { BoardService } from '../services/board.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Reply } from '../model/board';
-
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-humor',
   templateUrl: './humor.component.html',
@@ -15,30 +16,34 @@ export class HumorComponent implements OnInit {
   reply = new Reply();
   replys : any;
   data : any;
+ 
   constructor(
+    private spinnerService: Ng4LoadingSpinnerService,
     private boardService : BoardService,
     private humorService : HumorService,
     private route : ActivatedRoute,
     private location : Location,
     private router : Router
   ) { 
-    this.reply.regData = new Date();
-    this.reply.type = 0;
-
     const id = this.route.snapshot.paramMap.get('id');
     const page = this.route.snapshot.paramMap.get('page');
-    console.log('page',page);
+   
+    this.reply.type = 0;
+    this.reply.id = id;
+    this.reply.name ='';
+    this.reply.password = '';
+    this.reply.content = '';
     this.humorService.getHumor(id).subscribe(data=>{
-
       console.log(data);
 
       this.data = data;
     })
 
-    this.onRelyList();
+    this.onRelyList(id);
   }
 
   ngOnInit() {
+
   }
 
   goBack(){
@@ -46,20 +51,33 @@ export class HumorComponent implements OnInit {
   }
 
   onAdd(){
-    this.boardService.addReply(this.reply).subscribe(board => {
+    if(this.validate()){
+      this.reply.regData = new Date();
+      this.spinnerService.show();
+      this.boardService.addReply(this.reply).subscribe(board => {
 
-      this.onCompleteaddReply(board);
-    })
+
+        this.onCompleteaddReply(board);
+      })
+    }
+
   }
 
   onCompleteaddReply(data){
     console.log(data);
 
+    this.onRelyList(data.id);
+    this.spinnerService.hide();
+
+    this.reply.name ='';
+    this.reply.password = '';
+    this.reply.content = '';
     //this.router.navigateByUrl('/board/'+data._id);
   }
 
-  onRelyList(){
-    this.boardService.getReplys().subscribe(replys => {
+  onRelyList(id){
+    console.log(id);
+    this.boardService.getReplys(id).subscribe(replys => {
       this.onCompleteRelyList(replys);
     })
   }
@@ -68,6 +86,25 @@ export class HumorComponent implements OnInit {
     console.log('replys',replys);
 
     this.replys = replys.value;
+  }
+
+  validate(){
+    if(this.reply.name == '' ) {
+      alert('이름을 입력해주세요');
+      return false;
+    }
+    if(this.reply.password == '' ) {
+      alert('비밀번호를 입력해주세요');
+      return false;
+    }
+
+    if(this.reply.content == '' ) {
+      alert('내용을 입력해주세요');
+      return false;
+    }
+
+
+    return true;
   }
   
 

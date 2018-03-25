@@ -15,7 +15,9 @@ export class Main{
 }
 
 export class Reply{
+
     type: Number;     //게시물종류(0 : 스타갤, 1 : 몸갤)
+    id : String;
     name: String;     //이름
     password: String; //패스워드
     content: String;  //내용

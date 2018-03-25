@@ -34,8 +34,6 @@ export class HumorboardComponent implements OnInit {
     
   }
   ngOnInit() {
-    
-    console.log(this.id);
     var page = this.route.snapshot.paramMap.get('page');
 
     if(page != null) {
@@ -43,25 +41,13 @@ export class HumorboardComponent implements OnInit {
     }
 
     this.humorService.getHumors(page,10).subscribe(data=>{
-
-      
-      console.log(data);
       this.totalPage = data.page;
-
       this.data = data;
-
-      console.log(this.getCurrentPageGroup());
-      console.log(this.getStartPageNo());
-      console.log(this.getEndPageNo());
-
       this.startPageNo = this.getStartPageNo();
       this.endPageNo = this.getEndPageNo();
       for(var i = this.startPageNo; i <= this.endPageNo;i++){
         this.pages.push(i);
       }
-
-
-  
     })
 
     this.router.routeReuseStrategy.shouldReuseRoute = function(){
@@ -107,7 +93,6 @@ export class HumorboardComponent implements OnInit {
     if(endPageNo > this.totalPage){
       endPageNo = this.totalPage;
     }
-
     return endPageNo;
   }
 

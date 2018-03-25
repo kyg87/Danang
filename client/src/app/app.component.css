@@ -1,5 +1,25 @@
 @charset "utf-8";
 
+.ad_side_list {
+    position: absolute;
+    top: 179px;
+    width: 160px;
+    height: 600px;
+    left: 50%;
+    margin: 0 0 0 -817px;
+    z-index: 2;
+}
+
+.side_right_list {
+    position: absolute;
+    top: 179px;
+    width: 160px;
+    height: 600px;
+    left: 50%;
+    margin: 0 0 0 460px;
+    z-index: 2;
+}
+
 /* View */
 .view-wrap .img-photo i { background: rgb(245, 245, 245); padding: 16px; border-radius: 50%; width: 80px; height: 80px; text-align: center; color: rgb(143, 143, 143); font-size: 40px; display: inline-block; }
 .view-wrap .img-photo img { border-radius: 50%; width: 80px !important; height: 80px !important; display:inline-block; }

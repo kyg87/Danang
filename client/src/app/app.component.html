@@ -1,4 +1,25 @@
 <app-header></app-header>
+<ng4-loading-spinner></ng4-loading-spinner>
 
-<router-outlet></router-outlet>
 
+<div class="row">
+    <div class="col-md-2">
+        <ng-adsense 
+        [adClient]="'ca-pub-2651262364281330'"
+        [adSlot]="5867796510"
+        [display]="'inline-block'"
+        [width]="300"
+        [height]="600">
+        </ng-adsense></div>
+    <div class="col-md-8">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="col-md-2">
+        <ng-adsense 
+        [adClient]="'ca-pub-2651262364281330'"
+        [adSlot]="1171671900"
+        [display]="'inline-block'"
+        [width]="300"
+        [height]="600">
+        </ng-adsense></div>
+</div>

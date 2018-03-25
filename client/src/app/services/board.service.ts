@@ -49,8 +49,9 @@ export class BoardService{
         return this.http.post('http://localhost:3000/api/reply',JSON.stringify(reply),{headers :headers}).map(res =>res.json());
     }
 
-    getReplys(){
-        return this.http.get('http://localhost:3000/api/replys')
+    getReplys(id){
+        console.log(id)
+        return this.http.get('http://localhost:3000/api/replys?id='+id)
         .map(res=>res.json());
     }
 
