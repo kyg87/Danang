@@ -1,0 +1,38 @@
+ <!-- Page Content -->
+ <div class="container">
+
+  <!-- <h1 class="my-4 text-center text-lg-left">Thumbnail Gallery</h1> -->
+
+  <div class="row text-center text-lg-left">
+
+    <div class="col-lg-3 col-md-4 col-xs-6" *ngFor = "let instar of data?.value">
+      <video *ngIf ="instar.mp4 !=''" class="img-fluid img-thumbnail" src="{{instar.mp4}}" autoplay="autoplay" controls></video>
+      <a *ngFor = "let src of instar?.imgs ;let i = index" href="#" class="d-block mb-4 h-100" >
+       
+        <img *ngIf="i==0; "class="img-fluid img-thumbnail" src="{{src.src}}" alt="">
+      </a>
+   
+    </div>
+    
+  </div>
+
+</div>
+<nav class="text-center">
+    <ul class="pagination">
+      <li [ngClass] = "{ disable : (page -5) <= 0}" >
+        <a [routerLink]="['/instargall', startPageNo-5]" aria-label="Previous" >
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li   *ngFor = "let pageNo of pages;let first = first;" [ngClass] = "{ active : pageNo == page}">
+          <a [routerLink]="['/instargall', pageNo]" >{{pageNo}}</a>                  
+      </li>
+
+      <li>
+        <a [routerLink]="['/instargall', endPageNo+1]" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+<!-- /.container -->

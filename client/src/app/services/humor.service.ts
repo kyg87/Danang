@@ -28,6 +28,11 @@ export class HumorService{
         return this.http.get('http://localhost:3000/api/bodygall/'+id).map(res=>res.json());
     }
 
+    getInstars(page ,size){
+        return this.http.get('http://localhost:3000/api/he_le_n_?page='+page + '&size='+ size)
+        .map(res=>res.json());
+    }
+
     // addBoard(newBoard){
     //     var headers = new Headers();
 
