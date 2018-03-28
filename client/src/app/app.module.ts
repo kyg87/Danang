@@ -20,12 +20,8 @@ import { BodyComponent } from './body/body.component';
 
 import { AdsenseModule } from 'ng2-adsense';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
-<<<<<<< HEAD
-import { InstarboardComponent } from './instarboard/instarboard.component'
-=======
 import { InstarboardComponent } from './instarboard/instarboard.component';
 import { InstarComponent } from './instar/instar.component'
->>>>>>> 46283c988df171fc239482ad762725d169b7c20c
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,12 +35,8 @@ import { InstarComponent } from './instar/instar.component'
     EditComponent,
     BodygallComponent,
     BodyComponent,
-<<<<<<< HEAD
-    InstarboardComponent
-=======
     InstarboardComponent,
     InstarComponent
->>>>>>> 46283c988df171fc239482ad762725d169b7c20c
   ],
   imports: [
     BrowserModule,

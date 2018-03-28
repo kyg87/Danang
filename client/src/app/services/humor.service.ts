@@ -29,7 +29,7 @@ export class HumorService{
     }
 
     getInstars(page ,size){
-        return this.http.get('http://localhost:3000/api/he_le_n_?page='+page + '&size='+ size)
+        return this.http.get('http://125.129.60.150/api/he_le_n_?page='+page + '&size='+ size)
         .map(res=>res.json());
     }
 
