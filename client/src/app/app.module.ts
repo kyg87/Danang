@@ -22,6 +22,7 @@ import { AdsenseModule } from 'ng2-adsense';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { InstarboardComponent } from './instarboard/instarboard.component';
 import { InstarComponent } from './instar/instar.component'
+import { NgxGalleryModule } from 'ngx-gallery';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +45,7 @@ import { InstarComponent } from './instar/instar.component'
     ReactiveFormsModule,
     AppRoutingModule,
     FileUploadModule,
+    NgxGalleryModule,
     AdsenseModule.forRoot({
       adClient: 'ca-pub-2651262364281330',
       adSlot: 4461430600,
