@@ -15,7 +15,7 @@ var filejo = require('./routes/filejo');
 var j_caeyul = require('./routes/j_caeyul');
 var he_le_n_= require('./routes/he_le_n_');
 var partner = require('./routes/partner');
-var port = 3000;
+var port = 80;
 
 var app = express();
 

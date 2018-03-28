@@ -19,7 +19,8 @@ import { BodygallComponent } from './bodygall/bodygall.component';
 import { BodyComponent } from './body/body.component';
 
 import { AdsenseModule } from 'ng2-adsense';
-import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner'
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { InstarboardComponent } from './instarboard/instarboard.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,8 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner'
     HumorboardComponent,
     EditComponent,
     BodygallComponent,
-    BodyComponent
+    BodyComponent,
+    InstarboardComponent
   ],
   imports: [
     BrowserModule,
