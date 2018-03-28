@@ -28,7 +28,7 @@ export class InstarboardComponent implements OnInit {
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
 
-
+  //https://github.com/lukasz-galka/ngx-gallery
   constructor(
     private humorService : HumorService,
     private route : ActivatedRoute,
