@@ -16,7 +16,7 @@ export class EditComponent implements OnInit {
   board  = new Board();
   
     filePath : any;
-    public uploader:FileUploader = new FileUploader({url:'http://localhost:3000/upload'});
+    public uploader:FileUploader = new FileUploader({url:'http://motherbirds.com/upload'});
 
     
   constructor(

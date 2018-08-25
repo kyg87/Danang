@@ -24,8 +24,8 @@
                 <div class="row">
                     <div *ngFor="let humor of humors" class="col-xs-4 .col-md-3">
                         <div *ngFor="let img of humor?.imgs ;let i = index">
-                            <a [routerLink]="['/humor',1, humor._id]" *ngIf="i==0" href="#" class="thumbnail">
-
+                            <a  *ngIf="i==0"  class="thumbnail">
+                                <!-- [routerLink]="['/humor',1, humor._id]" -->
                                 <img style="min-height: 150px;max-height: 150px" src="{{img.src}}" alt="...">
                                 <div style="text-overflow: ellipsis;
                         white-space: nowrap;

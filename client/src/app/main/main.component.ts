@@ -23,7 +23,7 @@ export class MainComponent implements OnInit {
     private humorService : HumorService,
     private boardService : BoardService
   ) { 
-    this.humorService.getHumors(1,6).subscribe(data=>{
+    this.humorService.getInstars(1,6).subscribe(data=>{
 
       this.onCompleteGetHumors(data)
     })

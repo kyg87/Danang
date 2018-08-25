@@ -11,32 +11,32 @@ export class HumorService{
     }
 
     getHumors(page ,size){
-        return this.http.get('http://125.129.60.150/api/star?page='+page + '&size='+ size)
+        return this.http.get('https://motherbirds.com/api/star?page='+page + '&size='+ size)
         .map(res=>res.json());
     }
 
     getHumor(id){
-        return this.http.get('http://125.129.60.150/api/star/'+id).map(res=>res.json());
+        return this.http.get('https://motherbirds.com/api/star/'+id).map(res=>res.json());
     }
 
     getBodyGalls(page ,size){
-        return this.http.get('http://125.129.60.150/api/bodygall?page='+page + '&size='+ size)
+        return this.http.get('https://motherbirds.com/api/bodygall?page='+page + '&size='+ size)
         .map(res=>res.json());
     }
 
     getBodyGall(id){
-        return this.http.get('http://125.129.60.150/api/bodygall/'+id).map(res=>res.json());
+        return this.http.get('https://motherbirds.com/api/bodygall/'+id).map(res=>res.json());
     }
 
     getInstars(page ,size){
-        return this.http.get('http://125.129.60.150/api/he_le_n_?page='+page + '&size='+ size)
+        return this.http.get('https://motherbirds.com/api/he_le_n_?page='+page + '&size='+ size)
         .map(res=>res.json());
     }
 
-    // addBoard(newBoard){
-    //     var headers = new Headers();
+    addBoard(newBoard){
+        var headers = new Headers();
 
-    //     headers.append('Content-Type', 'application/json');
-    //     return this.http.post('http://localhost:3000/api/board',JSON.stringify(newBoard),{headers :headers}).map(res =>res.json());
-    // }
+        headers.append('Content-Type', 'application/json');
+        return this.http.post('https://motherbirds.com/api/board',JSON.stringify(newBoard),{headers :headers}).map(res =>res.json());
+    }
 }

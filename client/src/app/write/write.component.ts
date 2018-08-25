@@ -17,7 +17,7 @@ export class WriteComponent implements OnInit {
   board  = new Board();
 
   filePath : any;
-  public uploader:FileUploader = new FileUploader({url:'http://localhost:3000/upload'});
+  public uploader:FileUploader = new FileUploader({url:'https://motherbirds.com/upload'});
 
   constructor(
     private boardService: BoardService,
@@ -66,7 +66,7 @@ export class WriteComponent implements OnInit {
   onAdd(){
 
     if (this.filePath != undefined) {
-      this.board.filePath = "http://localhost:3000/users/" + this.filePath;
+      this.board.filePath = "http://motherbirds.com/users/" + this.filePath;
     }
     this.boardService.addBoard(this.board).subscribe(board => {
 
